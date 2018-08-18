@@ -11,9 +11,9 @@ import (
 )
 
 type tableNameObj struct {
-	TableName string // 表名
-	Text      string // 表中文名称
-	Form      string // 全量/增量形式
+	TableName string `json:"tableName"` // 表名
+	Text      string `json:"text"`      // 表中文名称
+	Form      string `json:"form"`      // 全量/增量形式
 }
 
 func init() {
@@ -28,7 +28,7 @@ func init() {
 func createClassNameByExcel() {
 	logs.SetLogger(logs.AdapterFile, `{"filename":"log/project.log","level":7,"maxlines":0,"maxsize":0,"daily":true,"maxdays":10}`)
 	logs.Info("根据Excel解析生成表配置")
-	xis, err := excelize.OpenFile("static/data/附件1_数据下发表清单.xlsx")
+	xis, err := excelize.OpenFile("static/data/table.xlsx")
 	if err != nil {
 		logs.Error(err)
 		return
