@@ -15,6 +15,7 @@ import (
 )
 
 func init() {
+	beego.ErrorController(&controllers.ErrorController{})
 	ns := beego.NewNamespace("/api",
 		beego.NSNamespace("/object", beego.NSInclude(&controllers.ObjectController{})),
 		beego.NSNamespace("/user", beego.NSInclude(&controllers.UserController{})),

@@ -1,7 +1,7 @@
-/dataAnalysis.exe~
+/log
+/.idea
+/dataAnalysis.exe
 /dataAnalysis.tar.gz
 /lastupdate.tmp
+/routers/commentsRouter_.go
 /static/config/tableName.json
-/static/data/附件1_数据下发表清单.xlsx
-/routers/commentsRouter_controllers.go
-/log/project.log
