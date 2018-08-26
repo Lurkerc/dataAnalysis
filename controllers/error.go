@@ -11,7 +11,7 @@ type ErrorController struct {
 
 // 404
 func (e *ErrorController) Error404() {
-	jsonData := utils.JsonData{"", utils.State{"not found", 404, false,},}
+	jsonData := utils.JsonData{"", utils.State{"not found", 404, false}}
 	e.Data["json"] = jsonData
 	e.ServeJSON()
 }

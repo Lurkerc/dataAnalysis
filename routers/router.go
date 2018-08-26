@@ -8,8 +8,8 @@
 package routers
 
 import (
-	_ "dataAnalysis/utils"
 	"dataAnalysis/controllers"
+	_ "dataAnalysis/utils"
 
 	"github.com/astaxie/beego"
 )

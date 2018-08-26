@@ -1,12 +1,12 @@
 package utils
 
 import (
-	"os"
-	"compress/gzip"
 	"archive/tar"
-	"io"
-	"strings"
+	"compress/gzip"
 	"github.com/astaxie/beego/logs"
+	"io"
+	"os"
+	"strings"
 )
 
 //压缩 使用gzip压缩成tar.gz

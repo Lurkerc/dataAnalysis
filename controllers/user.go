@@ -5,11 +5,17 @@ import (
 	"encoding/json"
 
 	"github.com/astaxie/beego"
+	"dataAnalysis/utils"
 )
 
 // Operations about Users
 type UserController struct {
 	beego.Controller
+}
+
+type loginData struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
 }
 
 // @Title CreateUser
@@ -96,15 +102,19 @@ func (u *UserController) Delete() {
 // @Param	password		query 	string	true		"The password for login"
 // @Success 200 {string} login success
 // @Failure 403 user not exist
-// @router /login [get]
+// @router /login [post]
 func (u *UserController) Login() {
-	username := u.GetString("username")
-	password := u.GetString("password")
-	if models.Login(username, password) {
-		u.Data["json"] = "login success"
+	var loginData loginData
+	json.Unmarshal(u.Ctx.Input.RequestBody, &loginData)
+	loginRes, err := models.Login(loginData.Username, loginData.Password)
+	state := utils.State{}
+	state.Success = loginRes
+	if loginRes {
+		state.Msg = "认证成功"
 	} else {
-		u.Data["json"] = "user not exist"
+		state.Msg = "认证失败"
 	}
+	u.Data["json"] = utils.JsonData{"", utils.GetState(err, state)}
 	u.ServeJSON()
 }
 
@@ -116,4 +126,3 @@ func (u *UserController) Logout() {
 	u.Data["json"] = "logout success"
 	u.ServeJSON()
 }
-

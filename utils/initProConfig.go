@@ -6,11 +6,11 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/logs"
 	"os"
-	"strings"
 	"regexp"
+	"strings"
 )
 
-type tableNameObj struct {
+type TableNameObj struct {
 	TableName string `json:"tableName"` // 表名
 	Text      string `json:"text"`      // 表中文名称
 	Form      string `json:"form"`      // 全量/增量形式
@@ -34,7 +34,7 @@ func createClassNameByExcel() {
 		return
 	}
 	logs.Info("Excle文件读取完成")
-	tableName := make(map[string]tableNameObj)
+	tableName := make(map[string]TableNameObj)
 	// 获取工作表中sheet1中的值
 	rows := xis.GetRows("Sheet1")
 	re, _ := regexp.Compile("表$")
@@ -43,7 +43,7 @@ func createClassNameByExcel() {
 		tableNameKey := strings.ToLower(row[0])
 		// 移除最后一个“表”字
 		tableNameText := re.ReplaceAllString(row[1], "")
-		tableName[tableNameKey] = tableNameObj{tableNameKey, tableNameText, strings.ToLower(row[2])}
+		tableName[tableNameKey] = TableNameObj{tableNameKey, tableNameText, strings.ToLower(row[2])}
 	}
 	// map 转 json
 	tableNameStr, err := json.Marshal(tableName)
